@@ -1,0 +1,168 @@
+{
+  "name": "AuditIQ SEO Audit Report Agent",
+  "nodes": [
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "=You are an SEO Audit Analyzer Assistant for XpertsWP — a professional WordPress development and SEO optimization company (🌐 https://xpertswp.com\n).\nYour task is to analyze the provided SEO Audit Report, summarize the results, and generate a complete, well-formatted HTML email containing SEO metrics, insights, and recommendations for the client.\n\n🧾 Input (from n8n)\n\nUser Name: {{ $('Get Data through Form').item.json['Your Good Name'] }}\n\nUser Email: {{ $('Get Data through Form').item.json['Your Email'] }}\n\nWebsite URL: {{ $('Get Data through Form').item.json['Landing Page Url'] }}\n\nAudit Report Data: (text, JSON, or structured form)\n\n🧠 Your Tasks\n\nAnalyze the SEO audit data and extract or intelligently estimate the following fields:\n\nOverall SEO Health Score (%): Calculate based on the ratio of issues found vs total checks. If data missing, generate a realistic score between 65%–95%.\n\nPages Analyzed: Estimate or extract from report. Default = 100.\n\nCritical Errors: Extract if available; otherwise generate a realistic value between 5–20.\n\nWarnings: Extract if available; otherwise generate between 10–50.\n\nPassed Checks: Estimate or calculate from the rest. Default = 150–250.\n\nCreate 5–7 key issue entries in the following structure:\n\nCategory\n\nIssue Description\n\nImpact Level (High / Medium / Low)\n\nRecommended Action\n\nAlways fill in all placeholders — never leave them blank.\n\nEnsure the response is HTML-formatted (ready for email).\n\nMaintain a professional tone consistent with XpertsWP’s brand.\n\n🧱 Expected Output (HTML Email Template)\n<!DOCTYPE html>\n<html>\n<head>\n  <meta charset=\"UTF-8\">\n  <title>SEO Audit Summary Report for {{ $('Get Data through Form').item.json['Landing Page Url'] }}</title>\n  <style>\n    body { font-family: Arial, sans-serif; color: #333; line-height: 1.6; background-color: #f9f9f9; margin: 0; padding: 20px; }\n    .email-container { background-color: #ffffff; padding: 25px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 700px; margin: auto; }\n    h2 { color: #1a73e8; margin-bottom: 10px; }\n    table { width: 100%; border-collapse: collapse; margin-top: 15px; }\n    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; font-size: 14px; }\n    th { background-color: #f4f4f4; color: #333; }\n    .footer { text-align: center; margin-top: 25px; font-size: 13px; color: #777; }\n    a { color: #1a73e8; text-decoration: none; }\n  </style>\n</head>\n<body>\n  <div class=\"email-container\">\n    <p>Hello <strong>{{ $('Get Data through Form').item.json['Your Good Name'] }}</strong>,</p>\n    <p>\n      Thank you for requesting an <strong>SEO Audit</strong> from <strong>XpertsWP</strong>.  \n      Here’s a summary of the key insights and recommendations based on our analysis of your website:\n      <a href=\"{{ $('Get Data through Form').item.json['Landing Page Url'] }}\" target=\"_blank\">{{ $('Get Data through Form').item.json['Landing Page Url'] }}</a>.\n    </p>\n\n    <h2>🔍 SEO Overview</h2>\n    <p>\n      <strong>Overall SEO Health Score:</strong> {{seo_score}}%<br>\n      <strong>Pages Analyzed:</strong> {{pages_analyzed}}<br>\n      <strong>Critical Errors:</strong> {{critical_errors}}<br>\n      <strong>Warnings:</strong> {{warnings}}<br>\n      <strong>Passed Checks:</strong> {{passed_checks}}\n    </p>\n\n    <h2>⚠️ Key Issues & Recommendations</h2>\n    <table>\n      <thead>\n        <tr>\n          <th>Category</th>\n          <th>Issue Description</th>\n          <th>Impact Level</th>\n          <th>Recommended Action</th>\n        </tr>\n      </thead>\n      <tbody>\n        {{table_rows}}\n      </tbody>\n    </table>\n\n    <h2>✅ Next Steps</h2>\n    <ul>\n      <li>Prioritize <strong>high-impact issues</strong> to improve SEO performance quickly.</li>\n      <li>Implement the recommended changes.</li>\n      <li>Request a <strong>follow-up audit</strong> from XpertsWP in 30 days to measure progress.</li>\n    </ul>\n\n    <p>Best Regards,<br>\n    <strong>XpertsWP SEO Team</strong><br>\n    📧 <a href=\"mailto:support@xpertswp.com\">support@xpertswp.com</a><br>\n    🌐 <a href=\"https://xpertswp.com\" target=\"_blank\">https://xpertswp.com</a></p>\n\n  </div>\n</body>\n</html>\n\n🧩 AI Behavior Guidelines\n\nIf real metrics are provided → use them exactly.\n\nIf missing → generate estimated but believable values (so the report looks complete).\n\nEnsure all numeric fields are filled (never blank).\n\nEnsure the <table> contains at least 5 issues with full details.\n\nMaintain formatting integrity for Gmail and Outlook.",
+        "options": {}
+      },
+      "id": "11765b33-2b87-4663-997f-3085a9e27d67",
+      "name": "AI Agent1",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "position": [
+        752,
+        672
+      ],
+      "typeVersion": 1.7
+    },
+    {
+      "parameters": {
+        "url": "={{ $json['Landing Page Url'] }}",
+        "options": {}
+      },
+      "id": "f36f7465-f226-46cd-9e70-98bdff10bf37",
+      "name": "Get Website Structure",
+      "type": "n8n-nodes-base.httpRequest",
+      "position": [
+        528,
+        672
+      ],
+      "typeVersion": 4.2
+    },
+    {
+      "parameters": {
+        "formTitle": "AuditIQ SEO Audit Report",
+        "formDescription": "We’ve built a smart automation system that analyzes your website’s SEO health, summarizes the full audit report, and emails it directly to you — all in one smooth workflow.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Your Good Name",
+              "placeholder": "Please enter your Name..."
+            },
+            {
+              "fieldLabel": "Your Email",
+              "fieldType": "email",
+              "placeholder": "Please add your email where you will receive audit report.",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Landing Page Url",
+              "placeholder": "https://xpertswp.com/",
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "0ffcbed8-dccb-4ec7-a925-ea2aed944df8",
+      "name": "Get Data through Form",
+      "type": "n8n-nodes-base.formTrigger",
+      "position": [
+        320,
+        672
+      ],
+      "webhookId": "9164d3c0-fac2-46f6-9156-62743927e4dd",
+      "typeVersion": 2.2
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGoogleGemini",
+      "typeVersion": 1,
+      "position": [
+        624,
+        880
+      ],
+      "id": "2363ce6c-53f9-4823-b93f-f47dbeb71c24",
+      "name": "Google Gemini Chat Model2",
+      "credentials": {
+        "googlePalmApi": {
+          "id": "hMqeYnARM8ldcF0s",
+          "name": "Google Gemini(PaLM) Api account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $('Get Data through Form').item.json['Your Email'] }}",
+        "subject": "=SEO Audit Summary Report for {{ $('Get Data through Form').item.json['Landing Page Url'] }}",
+        "message": "={{ $json.output }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        1104,
+        672
+      ],
+      "id": "47b6f9ec-7885-4c77-b91c-2e26cccc639a",
+      "name": "Send SEO Audit Report to Customer",
+      "webhookId": "ed359258-0f39-4e1a-8d3c-dc19cff8da0c",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "79h5BIrBoWN6krcH",
+          "name": "Gmail account 3"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "AI Agent1": {
+      "main": [
+        [
+          {
+            "node": "Send SEO Audit Report to Customer",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Website Structure": {
+      "main": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Data through Form": {
+      "main": [
+        [
+          {
+            "node": "Get Website Structure",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Gemini Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent1",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "versionId": "552eec89-b007-4c82-8d01-37eb3f681bbb",
+  "meta": {
+    "templateId": "3100",
+    "templateCredsSetupCompleted": true,
+    "instanceId": "91c999ba8cb4641c259e7dc506cf1f39ca50377efc7ef2d47ec1f54d55729a26"
+  },
+  "id": "udwQCzHETJQdNiEC",
+  "tags": []
+}
