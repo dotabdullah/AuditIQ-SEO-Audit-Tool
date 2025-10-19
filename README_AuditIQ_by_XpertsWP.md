@@ -61,8 +61,6 @@ direct report requests - 🖥️ A **desktop dashboard** for report viewing -
 ## 👨‍💻 Developer Info
 
 **Developed by:** [XpertsWP](https://xpertswp.com)\
-**Credits:** 🙌 *Sir Zafar Iqbal* --- for empowering us in AI
-Automation\
 **Automation Developer:** Abdullah Shahzad
 
 📧 **support@xpertswp.com**\
@@ -80,6 +78,6 @@ Automation\
 ------------------------------------------------------------------------
 
 📞 **Contact Developer** - Abdullah Shahzad\
-- 📧 shahzadabdullah37@gmail.com\
+- 📧 shahzadabdullah37@gmail.com
 - 💡 "If you need a custom automation system for your business --- Let's
 collaborate!"
