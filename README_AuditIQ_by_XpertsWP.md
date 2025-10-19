@@ -25,8 +25,8 @@ recommendations and issue severity levels.
 ## 🧩 How It Works
 
 1.  The user fills out a form with:
-    -   Website URL\
-    -   Name\
+    -   Website URL
+    -   Name
     -   Email address
 2.  n8n workflow:
     -   Fetches audit data from an SEO analysis source (or uploaded
@@ -43,9 +43,10 @@ recommendations and issue severity levels.
 
 ## 🧠 Future Version (v2)
 
-🚀 **AuditIQ v2** will include: - 🌐 A **web application frontend** for
-direct report requests - 🖥️ A **desktop dashboard** for report viewing -
-📄 **PDF Report Generation** and automated email delivery
+🚀 **AuditIQ v2** will include: 
+- 🌐 A **web application frontend** for direct report requests
+- 🖥️ A **desktop dashboard** for report viewing
+- 📄 **PDF Report Generation** and automated email delivery
 
 ------------------------------------------------------------------------
 
@@ -63,7 +64,7 @@ direct report requests - 🖥️ A **desktop dashboard** for report viewing -
 **Developed by:** [XpertsWP](https://xpertswp.com)\
 **Automation Developer:** Abdullah Shahzad
 
-📧 **support@xpertswp.com**\
+📧 **support@xpertswp.com**
 🌐 **https://xpertswp.com**
 
 ------------------------------------------------------------------------
@@ -77,7 +78,9 @@ direct report requests - 🖥️ A **desktop dashboard** for report viewing -
 
 ------------------------------------------------------------------------
 
-📞 **Contact Developer** - Abdullah Shahzad\
+## 📞 **Contact Developer** 
+
+- Abdullah Shahzad
 - 📧 shahzadabdullah37@gmail.com
 - 💡 "If you need a custom automation system for your business --- Let's
 collaborate!"
